@@ -1,0 +1,102 @@
+{% extends "base.html"%}
+
+{% block content %}
+
+{% if photoset.description %}
+<span id="gallery-about">(about)</span>
+{% endif %}
+<div id="about-text" class="editorial" style="display: none;">
+  <p>
+  {{photoset.description}}
+  </p>
+</div>
+
+<ul id="gallery-nav">
+  {% for nav in photoset_nav %}
+  <li class="{{nav.selected|yesno:"selected,unselected"}}">
+    <a href="{{nav.photoset.absolute_url}}">
+      {{nav.photoset.navigation_title}}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+  <div id="gallery">
+    <div class="gallery">
+      <div id="controls"></div>
+      <div id="loading"></div>
+      <div id="slideshow"></div>
+      <div id="caption"></div>
+    </div>
+    <div id="thumbs">
+      <ul class="thumbs noscript">
+        {% for p in photos %}
+          <li>
+              <a class="thumb" href="{{p.photo_url}}" title="{{p.json.title}}">
+                  <img height="75" width="75" src="{{p.square_photo_url}}" alt="{{p.json.title}}" />
+              </a>
+              <div class="caption">
+                  {{p.json.title}}
+              </div>
+          </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <br class="clear"/>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/ui/galleriffic-1.0/js/jquery.galleriffic.min.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#gallery-about").toggle(
+      function(){
+        var link = $(this);
+        $("#about-text").show();
+        link.text("(close)");
+      },
+      function(){
+        var link = $(this);
+        $("#about-text").hide();
+        link.text("(about)");
+      });
+
+
+
+    var gallery = $('#gallery .gallery').galleriffic('#thumbs', {
+        delay:                  3000, // in milliseconds
+        numThumbs:              10, // The number of thumbnails to show page
+        preloadAhead:           40, // Set to -1 to preload all images
+        enableTopPager:         false,
+        enableBottomPager:      true,
+        imageContainerSel:      '#slideshow', // The CSS selector for the element within which the main slideshow image should be rendered
+        controlsContainerSel:   '#controls', // The CSS selector for the element within which the slideshow controls should be rendered
+        captionContainerSel:    '#caption', // The CSS selector for the element within which the captions should be rendered
+        loadingContainerSel:    '#loading', // The CSS selector for the element within which should be shown when an image is loading
+        renderSSControls:       false, // Specifies whether the slideshow's Play and Pause links should be rendered
+        renderNavControls:      true, // Specifies whether the slideshow's Next and Previous links should be rendered
+        playLinkText:           'Play',
+        pauseLinkText:          'Pause',
+        prevLinkText:           '&laquo;',
+        nextLinkText:           '&raquo;',
+        nextPageLinkText:       '&raquo;',
+        prevPageLinkText:       '&laquo;',
+        enableHistory:          false, // Specifies whether the url's hash and the browser's history cache should update when the current slideshow image changes 
+        autoStart:              false, // Specifies whether the slideshow should be playing or paused when the page first loads 
+        onChange:               undefined, // accepts a delegate like such: function(prevIndex, nextIndex) { ... }
+        onTransitionOut:        function(callback) {
+					$('#caption').fadeTo('fast', 0.0);
+					$('#slideshow').fadeTo('fast', 0.0, callback);
+				},
+				onTransitionIn:         function() {
+					$('#slideshow').fadeTo('fast', 1.0);
+					$('#caption').fadeTo('fast', 1.0);
+				},
+        onPageTransitionOut:    undefined,
+        onPageTransitionIn:     undefined
+    });
+});
+</script>
+{% endblock %}

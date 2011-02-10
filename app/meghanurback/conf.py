@@ -1,0 +1,1 @@
+ETSY_ACCOUNT = 'meghanurback'

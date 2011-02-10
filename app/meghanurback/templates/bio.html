@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+
+{% block content %}
+  <div class="editorial">
+  {% for section in bio_sections %}
+    <p>
+      {{section}}
+    </p>
+  {% endfor %}
+  </div>
+{% endblock %}

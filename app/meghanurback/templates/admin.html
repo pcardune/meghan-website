@@ -1,0 +1,174 @@
+{% extends "base_admin.html"%}
+
+{% block content %}
+<a href="/admin/news/">Manage News</a>
+<a href="/admin/delicious/">Manage Delicious</a>
+
+
+  <h2>Flickr Galleries</h2>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Flickr Id</th>
+      <th>Order</th>
+      <th>About</th>
+      <th>Align Left</th>
+      <th>Enabled</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for photoset in photosets %}
+      <tr>
+        <td><a href="{{photoset.absolute_url}}">{{photoset.navigation_title}}</a></td>
+        <td>{{photoset.navigation_url}}</td>
+        <td>{{photoset.photoset_id}}</td>
+        <td class="order">{{photoset.navigation_order}}</td>
+        <td><a href="{{photoset.absolute_url}}/edit">{{photoset.about_text|truncatewords:5}}</a></td>
+        <td>{{photoset.navigation_align_left}}</td>
+        <td>
+          <form method="POST" action="" class="enable-form">
+            {% if photoset.enabled %}
+              <button type="submit" class="disable" name="disable" value="{{photoset.key}}">Disable</button>
+            {% else %}
+              <button type="submit" class="enable" name="enable" value="{{photoset.key}}">Enable</button>
+            {% endif %}
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="">
+            <button type="submit" class="delete" name="delete" value="{{photoset.key}}">Delete</button>
+          </form>
+        </td>
+        <td>
+          <a href="{{photoset.absolute_url}}/edit">Edit</a>
+        </td>
+      </tr>
+    {% endfor %}
+    <tr>
+      <form method="POST" action="">
+      <td><input type="text" name="navigation_title"/></td>
+      <td><input type="text" name="navigation_url"/></td>
+      <td>
+        <select name="photoset_id">
+          {% for photoset in photoset_list %}
+          <option value="{{photoset.id}}">{{photoset.title}}</option>
+          {% endfor %}
+        </select>
+      </td>
+      <td class="order"><input type="text" name="navigation_order"/></td>
+      <td></td>
+      <td><input type="checkbox" name="navigation_align_left"> align left</td>
+      <td><button type="submit" name="add" value="flickr_gallery">Add</button></td>
+      </form>
+    </tr>
+  </table>
+
+
+
+  <h2>Pages</h2>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Order</th>
+      <th colspan="3"></th>
+    </tr>
+    {% for page in pages %}
+      <tr>
+        <td><a href="{{page.absolute_url}}">{{page.navigation_title}}</a></td>
+        <td>{{page.navigation_url}}</td>
+        <td class="order">{{page.navigation_order}}</td>
+        <td>
+          <form method="POST" action="" class="enable-form">
+            {% if page.enabled %}
+              <button type="submit" class="disable" name="disable" value="{{page.key}}">Disable</button>
+            {% else %}
+              <button type="submit" class="enable" name="enable" value="{{page.key}}">Enable</button>
+            {% endif %}
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="">
+            <button type="submit" class="delete" name="delete" value="{{page.key}}">Delete</button>
+          </form>
+        </td>
+        <td>
+          <a href="{{page.absolute_url}}/edit">Edit</a>
+        </td>
+      </tr>
+    {% endfor %}
+    {% if page_form.errors %}
+    <tr>
+      <td>{{page_form.errors}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <form method="POST" action="" enctype="multipart/form-data">
+      <td>{{page_form.navigation_title}}</td>
+      <td>{{page_form.navigation_url}}</td>
+      <td class="order">{{page_form.navigation_order}}</td>
+      <td><button type="submit" name="add" value="page">Add</buton></td>
+      </form>
+    </tr>
+  </table>
+
+
+
+
+
+
+
+
+
+  <h2>File Uploads</h2>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Order</th>
+      <th>File</th>
+      <th>Align Left</th>
+      <th>Enabled</th>
+      <th></th>
+    </tr>
+    {% for upload in uploads %}
+      <tr>
+        <td><a href="{{upload.absolute_url}}">{{upload.navigation_title}}</a></td>
+        <td>{{upload.navigation_url}}</td>
+        <td class="order">{{upload.navigation_order}}</td>
+        <td><a href="{{upload.absolute_url}}edit">{{upload.filename}}</a></td>
+        <td>{{upload.navigation_align_left}}</td>
+        <td>
+          <form method="POST" action="" class="enable-form">
+            {% if upload.enabled %}
+              <button type="submit" class="disable" name="disable" value="{{upload.key}}">Disable</button>
+            {% else %}
+              <button type="submit" class="enable" name="enable" value="{{upload.key}}">Enable</button>
+            {% endif %}
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="">
+            <button type="submit" class="delete" name="delete" value="{{upload.key}}">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    {% if file_upload_form.errors %}
+    <tr>
+      <td>{{file_upload_form.errors}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <form method="POST" action="" enctype="multipart/form-data">
+      <td>{{file_upload_form.navigation_title}}</td>
+      <td>{{file_upload_form.navigation_url}}</td>
+      <td class="order">{{file_upload_form.navigation_order}}</td>
+      <td><input type="file" name="upload_data"/></td>
+      <td>{{file_upload_form.navigation_align_left}} align left</td>
+      <td><button type="submit" name="add" value="file_upload">Add</buton></td>
+      </form>
+    </tr>
+  </table>
+{% endblock %}

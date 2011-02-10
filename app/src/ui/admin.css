@@ -1,0 +1,27 @@
+.enable-form .enable{
+    background: #0f0;
+}
+
+.enable-form .disable{
+    background: #f00;
+}
+table{
+    border: 1px solid #ccc;
+}
+th{
+    font-weight: bold;
+    vertical-align: top;
+}
+td,th{
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+td.order input{
+    width: 2em;
+}
+
+#id_about_text{
+    width: 500px;
+    height: 300px;
+}

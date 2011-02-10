@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meghan Urback</title>
+    <meta name="google-site-verification" content="S43JpmbNF5gfvSL1WiB-akZ8QKBxO3RYv5d-yQjOOYs" />
+    {% if SITE_SETTINGS.site_keywords %}
+    <meta name="keywords"
+          content="{{SITE_SETTINGS.site_keywords}}"/>
+    {% endif %}
+    {% if SITE_SETTINGS.site_description %}
+    <meta name="description" content="{{SITE_SETTINGS.site_description}}" />
+    {% endif %}
+    {% if SETTINGS.OFFLINE %}
+    <link rel="stylesheet" type="text/css" href="/ui/reset-fonts.css" />
+    {% else %}
+    <link rel="stylesheet" type="text/css"
+          href="http://yui.yahooapis.com/combo?2.6.0/build/reset-fonts/reset-fonts.css" />
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="/ui/style.css?_v=2" />
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+  <!--[if lt IE 7]>  <div style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;'>    <div style='position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;'><a href='#' onclick='javascript:this.parentNode.parentNode.style.display="none"; return false;'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-cornerx.jpg' style='border: none;' alt='Close this notice'/></a></div>    <div style='width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;'>      <div style='width: 75px; float: left;'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-warning.jpg' alt='Warning!'/></div>      <div style='width: 275px; float: left; font-family: Arial, sans-serif;'>        <div style='font-size: 14px; font-weight: bold; margin-top: 12px;'>You are using an outdated browser</div>        <div style='font-size: 12px; margin-top: 6px; line-height: 12px;'>For a better experience using this site, please upgrade to a modern web browser.</div>      </div>      <div style='width: 75px; float: left;'><a href='http://www.firefox.com' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg' style='border: none;' alt='Get Firefox 3.5'/></a></div>      <div style='width: 73px; float: left;'><a href='http://www.apple.com/safari/download/' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg' style='border: none;' alt='Get Safari 4'/></a></div>      <div style='float: left;'><a href='http://www.google.com/chrome' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg' style='border: none;' alt='Get Google Chrome'/></a></div>    </div>  </div>  <![endif]-->
+
+    <div class="page">
+  <!--[if gte IE 7]>
+      <div style="text-align: center; padding: 10px 0px;">
+        For a better experience using this site, please
+        upgrade to a standards compliant web browser, such as
+        <a href='http://www.firefox.com' target='_blank'>Firefox</a>,
+        <a href='http://www.apple.com/safari/download/' target='_blank'>Safari</a>
+        or <a href='http://www.google.com/chrome' target='_blank'>Chrome</a>.
+      </div>
+  <![endif]-->
+      <div id="header">
+        {% block header %}
+        <h1><a href="/">Meghan Urback</a></h1>
+        {% block nav-wrapper %}
+        <span class="header-nav">
+          {% block nav %}
+          {% for item in NAVIGATION %}
+            <a href="{{item.url}}"
+               class="{{item.selected|yesno:"selected,unselected"}}
+                      {{item.css_class}}">{{item.title}}</a>
+          {% endfor %}
+          {% endblock %}
+        </span>
+        {% endblock %}
+        {% endblock %}
+      </div>
+      <hr class="nav-split" />
+    </div>
+    <div class="page">
+      {% block content-wrapper %}
+      <div id="content">
+        {% block content %} {% endblock %}
+      </div>
+      {% endblock %}
+      <div id="footer">&copy; 2009 Meghan Urback</div>
+      <div id="admin-footer">
+        <a href="/admin/">admin</a>
+        {% if LOGIN.is_admin %}
+        <a href="{{LOGIN.logout_url}}">logout</a> |
+        <a href="edit">edit</a>
+        {% endif %}
+      </div>
+      <div id="sub-footer">
+        Made by <a href="http://www.carduner.net">pcardune</a>
+      </div>
+    </div>
+    {% if SETTINGS.OFFLINE %}
+    <script type="text/javascript" src="/ui/jquery.min.js"></script>
+    {% else %}
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    {% endif %}
+    {% block scripts %} {% endblock %}
+
+    {% if not SETTINGS.OFFLINE %}
+
+{% ifequal request.META.SERVER_NAME "www.meghanurback.com" %}
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-1695778-11");
+      pageTracker._trackPageview();
+      } catch(err) {}</script>
+    {% endifequal %}
+
+
+    {% ifnotequal request.META.SERVER_NAME "localhost" %}
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-1695778-10");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>/
+    {% endifnotequal %}
+
+    {% endif %}
+  </body>
+</html>

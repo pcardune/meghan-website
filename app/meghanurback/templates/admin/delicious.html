@@ -1,0 +1,15 @@
+{% extends "base_admin.html" %}
+
+{% block content %}
+{{message}}
+<form method="POST">
+  <table>
+  {{form.as_table}}
+  </table>
+  <button type="submit" name="action" value="save">Save</button>
+</form>
+
+<form method="POST">
+  <button type="submit" name="action" value="refresh">Refresh Cache</button>
+</form>
+{% endblock %}

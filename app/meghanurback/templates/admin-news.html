@@ -1,0 +1,16 @@
+{% extends "base_admin.html"%}
+
+{% block content %}
+{% for item in news_items %}
+<div>
+  <a href="/admin/news/{{item.key}}/delete/">Delete</a>
+  {% include "news_item.html" %}
+</div>
+{% endfor %}
+<form action="" method="POST">
+  <table>
+    {{form.as_table}}
+  </table>
+  <button type="submit">Add</button>
+</form>
+{% endblock %}

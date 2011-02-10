@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/ui/admin.css">
+<style type="text/css">
+  #id_content{
+    width: 600px;
+    height: 300px;
+    font-family: Courier;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <h1>Administration</h1>
+  <form action="" method="POST">
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" name="action" value="save">Save</button>
+  </form>
+{% endblock %}

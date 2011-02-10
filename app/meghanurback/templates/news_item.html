@@ -1,0 +1,10 @@
+<div class="news-item">
+  <a href="{{item.url}}" class="title">{{item.title}}</a>
+  @
+  <a href="http://maps.google.com/maps?q={{item.location|urlencode}}"
+     target="_blank"
+     class="location" title="Click here to see a map.">{{item.location}}</a>
+  <p>
+    {{item.start_date|date:"F j"}} - {{item.end_date|date:"F j, Y"}}
+  </p>
+</div>

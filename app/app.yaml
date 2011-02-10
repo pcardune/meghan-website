@@ -1,0 +1,16 @@
+application: meghanurback-com
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /ui
+  static_dir: src/ui
+  expiration: 10d
+
+- url: /.*
+  script: main.py
+
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
