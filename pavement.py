@@ -26,14 +26,14 @@ def unzip(path):
 @task
 def getappengine():
     """Download Google App Engine"""
-    if os.path.exists("google_appengine_1.2.7.zip"):
-        cmd("rm google_appengine_1.2.7.zip")
+    if os.path.exists("google_appengine_1.4.1.zip"):
+        cmd("rm google_appengine_1.4.1.zip")
     if os.path.isdir("google_appengine"):
         cmd("rm -rf google_appengine")
-    open("google_appengine_1.2.7.zip","w").write(urllib2.urlopen("http://googleappengine.googlecode.com/files/google_appengine_1.2.7.zip").read())
-    #cmd("wget http://googleappengine.googlecode.com/files/google_appengine_1.2.7.zip")
-    cmd("unzip -uq google_appengine_1.2.7.zip")
-    cmd("rm google_appengine_1.2.7.zip")
+    open("google_appengine_1.4.1.zip","w").write(urllib2.urlopen("http://googleappengine.googlecode.com/files/google_appengine_1.4.1.zip").read())
+    #cmd("wget http://googleappengine.googlecode.com/files/google_appengine_1.4.1.zip")
+    cmd("unzip -uq google_appengine_1.4.1.zip")
+    cmd("rm google_appengine_1.4.1.zip")
 
 @task
 def init():
@@ -44,10 +44,10 @@ def init():
 def run():
     """Run the google app engine development server against gvr-online"""
     datastore = os.path.abspath(os.path.join(os.path.dirname(__file__), "data.datastore"))
-    cmd("google_appengine/dev_appserver.py --enable_sendmail "
+    cmd("python google_appengine/dev_appserver.py --enable_sendmail "
         "--address=0.0.0.0 --datastore_path=%s app" % datastore)
 
 @task
 def deploy():
     """Deploy to google app engine."""
-    cmd("google_appengine/appcfg.py update app")
+    cmd("python google_appengine/appcfg.py update app")
