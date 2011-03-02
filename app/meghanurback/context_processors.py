@@ -7,8 +7,10 @@ from meghanurback import models
 navigation_model = [
 #    dict(title='Home', url='/', regex=compile(r'^$'), order=0),
     dict(title='Portfolio', url='/gallery/', regex=compile(r'^gallery/'), order=0),
-    dict(title='Events', url='/events/', regex=compile(r'^events/$'), order=10),
+#    dict(title='Events', url='/events/', regex=compile(r'^events/$'), order=10),
+
 #    dict(title='Bio', url='/bio/', regex=compile(r'^bio/$'), order=0),
+
 #    dict(title='Stationery', css_class="etsy", url='http://meghanurback.etsy.com',
 #         regex=compile(r'^etsy/$'), order=30),
 ]
