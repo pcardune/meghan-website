@@ -278,6 +278,7 @@ hr.nav-split {
 }
 #gallery .thumbs a.thumb{
     outline: none;
+    text-decoration: none;
 }
 #gallery .thumbs a.thumb img{
     padding: 10px;
