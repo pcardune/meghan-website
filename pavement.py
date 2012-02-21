@@ -1,3 +1,4 @@
+import urllib
 import urllib2
 import os
 
@@ -14,26 +15,22 @@ def cmd(c, silent=False):
         print c
     os.system(c)
 
-def download(url, filepath=None):
-    if filepath is None:
-        filepath = url.split('/')[-1]
-    print "downloading %s to %s" % (url, filepath)
-    open(filepath,'w').write(urllib2.urlopen(url).read())
 
-def unzip(path):
-    cmd("unzip -uq %s" % path)
+APP_ENGINE_VERSION = '1.4.1'
 
 @task
 def getappengine():
     """Download Google App Engine"""
-    if os.path.exists("google_appengine_1.4.1.zip"):
-        cmd("rm google_appengine_1.4.1.zip")
+    zip_path = "google_appengine_"+APP_ENGINE_VERSION+".zip"
+    if os.path.exists(zip_path):
+        cmd("rm "+zip_path)
     if os.path.isdir("google_appengine"):
         cmd("rm -rf google_appengine")
-    open("google_appengine_1.4.1.zip","w").write(urllib2.urlopen("http://googleappengine.googlecode.com/files/google_appengine_1.4.1.zip").read())
-    #cmd("wget http://googleappengine.googlecode.com/files/google_appengine_1.4.1.zip")
-    cmd("unzip -uq google_appengine_1.4.1.zip")
-    cmd("rm google_appengine_1.4.1.zip")
+    urllib.urlretrieve(
+        "http://googleappengine.googlecode.com/files/google_appengine_"+APP_ENGINE_VERSION+".zip",
+        zip_path)
+    cmd("unzip -uq "+zip_path)
+    cmd("rm "+zip_path)
 
 @task
 def init():
