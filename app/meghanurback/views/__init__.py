@@ -28,10 +28,10 @@ def bio(request):
 #    return 'bio.html', locals()
 
 def redirect_to_gallery(request):
-    photosets = models.Photoset.all().fetch(1)
-    if len(photosets) == 0:
-        raise Http404()
-    return HttpResponseRedirect(photosets[0].absolute_url)
+    for ps in models.Photoset.all().order('navigation_order'):
+        if ps.enabled:
+            return HttpResponseRedirect(ps.absolute_url)
+    raise Http404()
 
 @with_context
 def gallery(request, navigation_url):
