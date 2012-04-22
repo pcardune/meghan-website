@@ -16,7 +16,7 @@ def cmd(c, silent=False):
     os.system(c)
 
 
-APP_ENGINE_VERSION = '1.4.1'
+APP_ENGINE_VERSION = '1.6.3'
 
 @task
 def getappengine():
