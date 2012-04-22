@@ -56,7 +56,7 @@
         {% block content %} {% endblock %}
       </div>
       {% endblock %}
-      <div id="footer">&copy; 2011 Meghan Urback</div>
+      <div id="footer">&copy; {% now "Y" %} Meghan Urback</div>
       <div id="admin-footer">
         <a href="/admin/">admin</a>
         {% if LOGIN.is_admin %}

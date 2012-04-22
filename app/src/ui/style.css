@@ -55,9 +55,9 @@ hr.nav-split {
 */
 }
 #header h1{
-    font-size: 300%;
+    font-size: 200%;
     font-family: Georgia, serif;
-    text-transform: lowercase;
+    text-transform: uppercase;
     text-align: left;
     padding-bottom: -20px;
     margin: 0 0 0 0;
@@ -74,7 +74,7 @@ hr.nav-split {
     color: #333;
     margin-right: 20px;
     text-decoration: none;
-    text-transform: lowercase;
+    text-transform: uppercase;
 }
 #header .header-nav a:hover{
     color: #000;
@@ -224,7 +224,8 @@ hr.nav-split {
 }
 #gallery-nav li a{
     text-decoration: none;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    font-size: 90%;
 }
 #gallery-nav li.selected a{
     font-weight: bold;
@@ -317,6 +318,11 @@ hr.nav-split {
 }
 #gallery .pagination .current{
     color: #aaa;
+}
+
+#caption {
+  width: 400px;
+  margin: 10px auto;
 }
 
 #content .resume h2{
