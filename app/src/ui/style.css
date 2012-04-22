@@ -163,8 +163,8 @@ hr.nav-split {
     max-height: 100px;
 }
 
-#about-text,
 #content .editorial{
+    padding: 30px 150px;
     width: 640px;
     text-align: justify;
 }

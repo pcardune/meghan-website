@@ -23,9 +23,6 @@ def news(request):
 @with_context
 def bio(request):
     return HttpResponseRedirect('/page/bio/')
-#    etsy_details = etsy.get_user_details(conf.ETSY_ACCOUNT)
-#    bio_sections = etsy_details.get('bio','').split('\n')
-#    return 'bio.html', locals()
 
 def redirect_to_gallery(request):
     for ps in models.Photoset.all().order('navigation_order'):
